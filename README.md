@@ -1,5 +1,5 @@
 <div align="center">
-    <h1 align="center">Transformers NLP Service</h1>
+    <h1 align="center">Transformer Models as a Service</h1>
     <br>
     <strong>A modular, composable, and scalable solution for building NLP services with Transformers<br></strong>
     <i>Powered by BentoML 🍱 + HuggingFace 🤗</i>
