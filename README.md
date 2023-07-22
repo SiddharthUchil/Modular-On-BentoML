@@ -11,10 +11,8 @@
 - This project showcase how one can serve HuggingFace's transformers models for various NLP with ease.
 - It incorporates BentoML's best practices, from setting up model services and handling pre/post-processing to deployment in production.
 - User can explore the example endpoints such as summarization and categorization via an interactive Swagger UI.
-
-<div align="center">
-    <img src="https://github.com/bentoml/transformers-nlp-service/blob/main/images/demo.gif" alt="Computer man" >   
-</div>
+- 
+![Transformers-NLP-Service](https://github.com/SiddharthUchil/Transformers-NLP-Service/assets/36127139/817f865b-9f9c-452b-9e9b-ac70aa17d061)
 
 ## 🏃‍♂️ Running the Service 🏃‍♂️
 To fully take advantage of this repo, we recommend you to clone it and try out the service locally. 
