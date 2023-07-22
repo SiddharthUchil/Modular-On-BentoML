@@ -11,7 +11,7 @@
 - This project showcase how one can serve HuggingFace's transformers models for various NLP with ease.
 - It incorporates BentoML's best practices, from setting up model services and handling pre/post-processing to deployment in production.
 - User can explore the example endpoints such as summarization and categorization via an interactive Swagger UI.
-- 
+  
 ![Transformers-NLP-Service](https://github.com/SiddharthUchil/Transformers-NLP-Service/assets/36127139/817f865b-9f9c-452b-9e9b-ac70aa17d061)
 
 ## 🏃‍♂️ Running the Service 🏃‍♂️
@@ -32,9 +32,7 @@ You can then open your browser at http://127.0.0.1:3000 and interact with the se
 
 ### Containers
 
-We also provide two pre-built container to run on CPU and GPU respectively. 
-This requires any container engine, such as docker, podman, ...
-You can then quickly try out the service by running the container:
+There are two pre-built container to run on CPU and GPU respectively. 
 
 ```bash
 # cpu
@@ -78,7 +76,6 @@ To run the container with gRPC, do
 docker run -p 3000:3000 -p 3001:3001 ghcr.io/bentoml/nlp:cpu serve-grpc
 ``` 
 
-To find more information about gRPC with BentoML, refer to [our documentation](https://docs.bentoml.org/en/latest/guides/grpc.html)
 
 ## 🌐 Interacting with the Service 🌐
 The default mode of BentoML's model serving is via HTTP server. Here, we showcase a few examples of how one can interact with the service:
@@ -105,73 +102,6 @@ Celebrity stylist Law Roach on dressing Zendaya and '\''faking it '\''till you m
 A quill strapped across her chest, Schafer let us know she is still writing her narrative — and defining herself on her own terms. There'\''s an entire story contained in those two garments. As De Saint Sernin said in the show notes: "Thirty-six looks, each one a heartfelt sentence."
 The powerful ensemble may become one of Law Roach'\''s last celebrity styling credits. Roach announced over social media on Tuesday that he would be retiring from the industry after 14 years of creating conversation-driving looks for the likes of Zendaya, Bella Hadid, Anya Taylor-Joy, Ariana Grande and Megan Thee Stallion.'
 ```
-### Via BentoClient 🐍
-To send requests in Python, one can use ``bentoml.client.Client`` to send requests to the service:
-
-```python
-if __name__ == "__main__":
-    import bentoml
-
-    client = bentoml.client.Client.from_url(f"http://{host}:3000")
-
-    print("Summarized text from the article:", client.summarize(SAMPLES))
-    print("Categories prediction of the article:", client.categorize({'text': SAMPLES, 'categories': CATEGORIES}))
-```
-
-Run `python client.py` to see it in action.
-
-> Checkout the [`client.py`](./client.py) file for more details.
-
-Note that all API endpoints defined in `service.py` can be access through client through its sync and async methods. For example, the [`service.py`](./service.py) contains three endpoints: `/summarize`, `/categorize` and `/make_analysis`, and hence the following
-methods are available on the client instance:
-
-- `client.async_summarize` | `client.summarize`
-- `client.async_categorize` | `client.categorize`
-- `client.async_make_analysis` | `client.make_analysis`
-
-### Via Javascript
-You can also send requests to this service with `axios` in JS. 
-The following example sends a request to make analysis on a given text and categories:
-
-```javascript
-import axios from 'axios'
-
-var TEXT = `...`
-
-var CATEGORIES = [ 'world', 'politics', 'technology', 'defence', 'parliament' ]
-
-const client = axios.create({
-  baseURL: 'http://localhost:3000',
-  timeout: 3000,
-})
-
-client
-  .post('/make_analysis', {
-    text: TEXT,
-    categories: CATEGORIES.join(', '),
-  })
-  .then(function (r) {
-    console.log('Full analysis:', r.data)
-  })
-```
-
-Run the `client.js` with `yarn run client` or `npm run client`, and it should yield the following result
-
-```prelog
-Full analysis: {
-  summary: " Actor and model Hunter Schafer wore a barely-there Oscars after party look . The look debuted
- earlier this month at fashion house Ann Demeulemeester's Fall-Winter 2023 runway . It was designed by des
-igner Ludovic de Saint Sernin, who is renowned for his eponymous label .",
-  categories: {
-    entertainment: 0.4694322943687439,
-    healthcare: 0.4245288372039795,
-    defence: 0.42102956771850586,
-    world: 0.416515976190567,
-  }
-}
-```
-
-> Checkout the [`client.js`](./client.js) for more details.
 
 ## ⚙️ Customization ⚙️
 ### What if I want to add tasks *X*?
@@ -202,32 +132,3 @@ Pre/post processing logics can be set in the `service.py` file.
 ### Where can I find more docs about Transformers and BentoML?
 BentoML supports Transformers models out of the box. You can find more details in the [BentoML support](https://docs.bentoml.org/en/latest/frameworks/transformers.html) for [Transformers](https://huggingface.co/docs/transformers/index).
 
-## 🚀 Deploying to Production 🚀
-Effortlessly transition your project into a production-ready application using [BentoCloud](https://www.bentoml.com/bento-cloud/), the production-ready platform for managing and deploying machine learning models.
-
-Start by creating a BentoCloud account. Once you've signed up, log in to your BentoCloud account using the command:
-
-```bash
-bentoml cloud login --api-token <your-api-token> --endpoint <bento-cloud-endpoint>
-```
-> Note: Replace `<your-api-token>` and `<bento-cloud-endpoint>` with your specific API token and the BentoCloud endpoint respectively.
-
-Next, build your BentoML service using the `build` command:
-
-```bash
-bentoml build
-```
-
-Then, push your freshly-built Bento service to BentoCloud using the `push` command:
-
-```bash
-bentoml push <name:version>
-```
-
-Lastly, deploy this application to BentoCloud with a single `bentoml deployment create` command following the [deployment instructions](https://docs.bentoml.org/en/latest/reference/cli.html#bentoml-deployment-create).
-
-BentoML offers a number of options for deploying and hosting online ML services into production, learn more at [Deploying a Bento](https://docs.bentoml.org/en/latest/concepts/deploy.html).
-
-## 👥 Community 👥
-BentoML has a thriving open source community where thousands of ML/AI practitioners are 
-contributing to the project, helping other users and discussing the future of AI. 👉 [Pop into our Slack community!](https://l.bentoml.com/join-slack)
