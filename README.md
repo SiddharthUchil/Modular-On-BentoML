@@ -1,5 +1,5 @@
 ## Overview
-- This project showcase how one can serve HuggingFace's transformers models for various NLP with ease.
+- This project showcases how one can serve HuggingFace's transformers models for various NLP with ease.
 - It incorporates BentoML's best practices, from setting up model services and handling pre/post-processing to deployment in production.
 - User can explore the example endpoints such as summarization and categorization via an interactive Swagger UI.
   
