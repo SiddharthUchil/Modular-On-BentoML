@@ -1,13 +1,4 @@
-<div align="center">
-    <h1 align="center">Transformer Models as a Service</h1>
-    <br>
-    <strong>A modular, composable, and scalable solution for building NLP services with Transformers<br></strong>
-    <i>Powered by BentoML 🍱 + HuggingFace 🤗</i>
-    <br>
-</div>
-<br>
-
-## 📖 Introduction 📖
+## Overview
 - This project showcase how one can serve HuggingFace's transformers models for various NLP with ease.
 - It incorporates BentoML's best practices, from setting up model services and handling pre/post-processing to deployment in production.
 - User can explore the example endpoints such as summarization and categorization via an interactive Swagger UI.
@@ -127,8 +118,4 @@ You can add more tasks and models by editing the `download_model.py` file.
 
 ### Where can I add API logics?
 Pre/post processing logics can be set in the `service.py` file.
-
-
-### Where can I find more docs about Transformers and BentoML?
-BentoML supports Transformers models out of the box. You can find more details in the [BentoML support](https://docs.bentoml.org/en/latest/frameworks/transformers.html) for [Transformers](https://huggingface.co/docs/transformers/index).
 
